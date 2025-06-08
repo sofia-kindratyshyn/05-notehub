@@ -2,7 +2,7 @@ import css from "./NoteForm.module.css"
 import {Formik, Field, Form, type FormikHelpers} from "formik"
 import type { NoteForPost } from "../../types/note"
 import { useMutation, useQueryClient} from "@tanstack/react-query"
-import { postNotes } from "../../services/NoteService"
+import { postNotes } from "../../services/noteService"
 import toast from "react-hot-toast"
 
 

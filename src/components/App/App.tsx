@@ -1,7 +1,7 @@
 import css from './App.module.css'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import NoteList from '../NoteList/NoteList'
-import { fetchNotes } from '../../services/NoteService'
+import { fetchNotes } from '../../services/noteService'
 import type { NoteResponce } from '../../types/note'
 import { useState } from 'react'
 import Pagination from '../Pagination/Pagination'

@@ -19,7 +19,7 @@ export async function fetchNotes(pageCount: number, searchedValue: string): Prom
     
 }
 
-export async function postNote(noteForPostObj: NoteForPost): Promise<NoteForPost>{
+export async function postNote(noteForPostObj: NoteForPost): Promise<Note>{
     const responce = await axios.post<Note>(`/notes`, noteForPostObj, {
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`
@@ -29,7 +29,7 @@ export async function postNote(noteForPostObj: NoteForPost): Promise<NoteForPost
 }
 
 export async function deleteNote(noteId: number): Promise<Note>{
-    const responce = await axios.delete(`/notes/${noteId}`, {
+    const responce = await axios.delete<Note>(`/notes/${noteId}`, {
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`
         }

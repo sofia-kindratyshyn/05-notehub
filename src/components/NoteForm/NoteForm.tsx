@@ -21,7 +21,7 @@ content: Yup.string()
 .max(500, "Content must not contain more than 500 symbols.")
 .required("Content is required"),
 tag: Yup.string()
-.oneOf(['Todo', 'Work', 'Meeting', 'Shoping'], 'Invalid tag selected')
+.oneOf(['Todo', 'Work', 'Meeting', 'Shopping'], 'Invalid tag selected')
 .required("Tag is required")
 })
 

@@ -1,6 +1,9 @@
 import axios from "axios";
-import type { NoteResponce } from "../types/note";
-import type { NoteForPost } from "../types/note";
+import type { NoteForPost} from "../types/note";
+export interface NoteResponce{
+    notes: [],
+    totalPages: number
+   }
 
 axios.defaults.baseURL = "https://notehub-public.goit.study/api"
 
@@ -12,21 +15,24 @@ export async function fetchNotes(pageCount: number, searchedValue: string): Prom
         }
     })
     return  responce.data;
+
     
 }
 
-export async function postNotes(noteForPostObj: NoteForPost){
-    await axios.post<NoteForPost>(`/notes`, noteForPostObj, {
+export async function postNote(noteForPostObj: NoteForPost){
+    const responce = await axios.post<NoteForPost>(`/notes`, noteForPostObj, {
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`
         }
     })
+    return responce.data;
 }
 
-export async function deleteNotes(noteId: number){
-    await axios.delete(`/notes/${noteId}`, {
+export async function deleteNote(noteId: number){
+    const responce = await axios.delete(`/notes/${noteId}`, {
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`
         }
     })
+    return responce.data;
 }

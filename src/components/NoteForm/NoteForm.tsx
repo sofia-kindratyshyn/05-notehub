@@ -1,10 +1,10 @@
 import css from "./NoteForm.module.css"
 import {Formik, Field, Form, type FormikHelpers, ErrorMessage} from "formik"
-import type { NoteForPost } from "../../types/note"
 import { useMutation, useQueryClient} from "@tanstack/react-query"
 import { postNote } from "../../services/noteService"
 import toast from "react-hot-toast"
 import * as Yup from "yup";
+import type { NoteForPost } from "../../types/note"
 
 
 
@@ -14,11 +14,15 @@ interface NoteFormProps{
 
 const CreatingNoteSchema = Yup.object().shape({
 title: Yup.string()
-.required("Title is required") ,
+.max(50, "Title must not contain more than 50 symbols.")
+.min(3, "Title should consist of at least 3 symbols.")
+.required("Title is required."),
 content: Yup.string()
-.min(2, "Content should contain at least 2 symbols")
+.max(500, "Content must not contain more than 500 symbols.")
 .required("Content is required"),
 tag: Yup.string()
+.oneOf(['Todo', 'Work', 'Meeting', 'Shoping'], 'Invalid tag selected')
+.required("Tag is required")
 })
 
 
@@ -28,7 +32,7 @@ export default function NoteForm({onClose}: NoteFormProps){
   const mutation = useMutation({
     mutationFn: (noteForPost: NoteForPost) => postNote(noteForPost) ,
     onError: ()=>{
-     toast.error("There was an error while deleting.")
+     toast.error("There was an error while creating.")
 
     },
     onSuccess: () => {
@@ -45,7 +49,8 @@ actions.resetForm()
 }
 
 return(
-<Formik initialValues={ { title: "",
+<Formik initialValues={ { 
+  title: "",
   content: "",
   tag: "Todo"}} onSubmit={handleSubmit}
   validationSchema={CreatingNoteSchema}

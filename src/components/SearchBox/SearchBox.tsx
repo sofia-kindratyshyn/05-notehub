@@ -1,10 +1,11 @@
 import css from "./SearchBox.module.css"
 
 interface SearchBoxProps{
-    getValue: (value: string) => void
+    getValue: (value: string) => void,
+    value: string
 }
 
-export default function SearchBox({getValue}: SearchBoxProps){
+export default function SearchBox({getValue, value}: SearchBoxProps){
  function handleChange(event: React.ChangeEvent<HTMLInputElement>){
     getValue(event.target.value)
  }
@@ -12,6 +13,7 @@ export default function SearchBox({getValue}: SearchBoxProps){
     return(
         <>
         <input
+        value={value}
          onChange={handleChange}
 	     className={css.input}
          type="text"
